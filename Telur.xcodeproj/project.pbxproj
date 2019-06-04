@@ -14,6 +14,10 @@
 		EFC8327222A379970039FA96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFC8327022A379970039FA96 /* Main.storyboard */; };
 		EFC8327422A379980039FA96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFC8327322A379980039FA96 /* Assets.xcassets */; };
 		EFC8327722A379980039FA96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFC8327522A379980039FA96 /* LaunchScreen.storyboard */; };
+		EFC8328022A3AD310039FA96 /* BoxEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC8327F22A3AD310039FA96 /* BoxEngine.swift */; };
+		EFC8328222A3AD480039FA96 /* AllEnumeration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC8328122A3AD480039FA96 /* AllEnumeration.swift */; };
+		EFC8328422A3AE1F0039FA96 /* BoxHorizontalStacker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC8328322A3AE1F0039FA96 /* BoxHorizontalStacker.swift */; };
+		EFDF8E6A22A4E54B00E23E8D /* BoxVerticalStacker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDF8E6922A4E54B00E23E8D /* BoxVerticalStacker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,10 @@
 		EFC8327322A379980039FA96 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EFC8327622A379980039FA96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EFC8327822A379980039FA96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EFC8327F22A3AD310039FA96 /* BoxEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxEngine.swift; sourceTree = "<group>"; };
+		EFC8328122A3AD480039FA96 /* AllEnumeration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEnumeration.swift; sourceTree = "<group>"; };
+		EFC8328322A3AE1F0039FA96 /* BoxHorizontalStacker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxHorizontalStacker.swift; sourceTree = "<group>"; };
+		EFDF8E6922A4E54B00E23E8D /* BoxVerticalStacker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxVerticalStacker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +66,7 @@
 		EFC8326522A379960039FA96 /* Telur */ = {
 			isa = PBXGroup;
 			children = (
+				EFC8327E22A3AD0D0039FA96 /* Engine */,
 				EFC8326622A379970039FA96 /* AppDelegate.swift */,
 				EFC8326822A379970039FA96 /* GameScene.sks */,
 				EFC8326C22A379970039FA96 /* GameScene.swift */,
@@ -68,6 +77,17 @@
 				EFC8327822A379980039FA96 /* Info.plist */,
 			);
 			path = Telur;
+			sourceTree = "<group>";
+		};
+		EFC8327E22A3AD0D0039FA96 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				EFC8327F22A3AD310039FA96 /* BoxEngine.swift */,
+				EFC8328122A3AD480039FA96 /* AllEnumeration.swift */,
+				EFC8328322A3AE1F0039FA96 /* BoxHorizontalStacker.swift */,
+				EFDF8E6922A4E54B00E23E8D /* BoxVerticalStacker.swift */,
+			);
+			path = Engine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,8 +163,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFC8326D22A379970039FA96 /* GameScene.swift in Sources */,
+				EFC8328222A3AD480039FA96 /* AllEnumeration.swift in Sources */,
+				EFC8328022A3AD310039FA96 /* BoxEngine.swift in Sources */,
 				EFC8326F22A379970039FA96 /* GameViewController.swift in Sources */,
 				EFC8326722A379970039FA96 /* AppDelegate.swift in Sources */,
+				EFC8328422A3AE1F0039FA96 /* BoxHorizontalStacker.swift in Sources */,
+				EFDF8E6A22A4E54B00E23E8D /* BoxVerticalStacker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
