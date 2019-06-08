@@ -22,10 +22,16 @@ class GameScene: SKScene {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        physicsWorld.gravity = CGVector(dx: 0.0, dy: -1.0)
+        physicsWorld.gravity = CGVector(dx: 0.0, dy: -9.8)
         isUserInteractionEnabled = true
         
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+
+    }
+    
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         scene?.anchorPoint = CGPoint(x: 0, y: 0)
@@ -39,10 +45,10 @@ class GameScene: SKScene {
         
         let SIZE_CONST = size.width / 10
         
-        let boxEngine = BoxVerticalStacker(boxSize: SIZE_CONST, scene: self, initialHeight: bottomNode.size.height,parent:foregroundNode)
+        var boxEngine = BoxVerticalStacker(boxSize: SIZE_CONST, scene: self, initialHeight: bottomNode.size.height,parent:foregroundNode)
         
         boxEngine.stackBoxes(level: 1)
-        
+        boxEngine.placeEgg(level: 1)
         
     }
     

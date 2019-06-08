@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EFB1709A22ABA2AA0046904C /* FoundationClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1709922ABA2AA0046904C /* FoundationClass.swift */; };
+		EFB445D922AB7AB600B9883C /* BoxClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB445D822AB7AB600B9883C /* BoxClass.swift */; };
+		EFB445DB22AB7D4300B9883C /* AllCollisionBitMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB445DA22AB7D4300B9883C /* AllCollisionBitMask.swift */; };
+		EFB445DD22AB7F9A00B9883C /* EggClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB445DC22AB7F9A00B9883C /* EggClass.swift */; };
 		EFC8326722A379970039FA96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC8326622A379970039FA96 /* AppDelegate.swift */; };
 		EFC8326922A379970039FA96 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EFC8326822A379970039FA96 /* GameScene.sks */; };
 		EFC8326D22A379970039FA96 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC8326C22A379970039FA96 /* GameScene.swift */; };
@@ -21,6 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EFB1709922ABA2AA0046904C /* FoundationClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationClass.swift; sourceTree = "<group>"; };
+		EFB445D822AB7AB600B9883C /* BoxClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxClass.swift; sourceTree = "<group>"; };
+		EFB445DA22AB7D4300B9883C /* AllCollisionBitMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCollisionBitMask.swift; sourceTree = "<group>"; };
+		EFB445DC22AB7F9A00B9883C /* EggClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EggClass.swift; sourceTree = "<group>"; };
 		EFC8326322A379960039FA96 /* Telur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Telur.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFC8326622A379970039FA96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFC8326822A379970039FA96 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -86,6 +94,10 @@
 				EFC8328122A3AD480039FA96 /* AllEnumeration.swift */,
 				EFC8328322A3AE1F0039FA96 /* BoxHorizontalStacker.swift */,
 				EFDF8E6922A4E54B00E23E8D /* BoxVerticalStacker.swift */,
+				EFB445D822AB7AB600B9883C /* BoxClass.swift */,
+				EFB445DA22AB7D4300B9883C /* AllCollisionBitMask.swift */,
+				EFB445DC22AB7F9A00B9883C /* EggClass.swift */,
+				EFB1709922ABA2AA0046904C /* FoundationClass.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -162,12 +174,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFB445D922AB7AB600B9883C /* BoxClass.swift in Sources */,
+				EFB1709A22ABA2AA0046904C /* FoundationClass.swift in Sources */,
 				EFC8326D22A379970039FA96 /* GameScene.swift in Sources */,
+				EFB445DB22AB7D4300B9883C /* AllCollisionBitMask.swift in Sources */,
 				EFC8328222A3AD480039FA96 /* AllEnumeration.swift in Sources */,
 				EFC8328022A3AD310039FA96 /* BoxEngine.swift in Sources */,
 				EFC8326F22A379970039FA96 /* GameViewController.swift in Sources */,
 				EFC8326722A379970039FA96 /* AppDelegate.swift in Sources */,
 				EFC8328422A3AE1F0039FA96 /* BoxHorizontalStacker.swift in Sources */,
+				EFB445DD22AB7F9A00B9883C /* EggClass.swift in Sources */,
 				EFDF8E6A22A4E54B00E23E8D /* BoxVerticalStacker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
