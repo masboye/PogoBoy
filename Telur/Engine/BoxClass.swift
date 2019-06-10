@@ -12,7 +12,7 @@ import SpriteKit
 class BoxSpriteNode : SKSpriteNode
 {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Touched \(self.name)")
+        //print("Touched \(self.name) \(self.parent?.children.count)")
         
         self.removeFromParent()
     }

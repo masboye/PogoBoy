@@ -17,9 +17,9 @@ struct BoxHorizontalStacker {
     
     private let boxEngine = BoxEngine()
     
-    func generateStack() -> [(BoxColors,Int,BoxOrientationForCenterBox,BoxPosition)] {
+    func generateStack() -> [(Int,BoxColors,Int,BoxOrientationForCenterBox)] {
         
-        var boxes:[(BoxColors,Int,BoxOrientationForCenterBox,BoxPosition)] = []
+        var boxes:[(Int,BoxColors,Int,BoxOrientationForCenterBox)] = []
         let centerColor = generateCenterBox()
         ////print(center)
         
@@ -32,7 +32,7 @@ struct BoxHorizontalStacker {
         case 5:
             //print("5 Boxes")
             let boxOrientationCenter = BoxOrientationForCenterBox.center
-            boxes.append((centerColor,centerBoxSize,boxOrientationCenter,BoxPosition.fixed))
+            boxes.append((5,centerColor,centerBoxSize,boxOrientationCenter))
             return boxes
             
         case 4:
@@ -45,15 +45,15 @@ struct BoxHorizontalStacker {
                 let rightBox = boxEngine.generateBox()
                 let rightBoxSize = produceBoxSizeReduced()
                 //print("LEFT --> Right Box \(rightBox) \(rightBoxSize)")
-                boxes.append((centerColor,centerBoxSize,BoxOrientationForCenterBox.left,BoxPosition.fixed))
-                boxes.append((rightBox,rightBoxSize,BoxOrientationForCenterBox.right,BoxPosition.fixed))
+                boxes.append((4,centerColor,centerBoxSize,BoxOrientationForCenterBox.left))
+                boxes.append((4,rightBox,rightBoxSize,BoxOrientationForCenterBox.right))
                 
             case .right:
                 let leftBox = boxEngine.generateBox()
                 let leftBoxSize = produceBoxSizeReduced()
                 //print("RIGHT --> Left Box \(leftBox) \(leftBoxSize)")
-                boxes.append((centerColor,centerBoxSize,BoxOrientationForCenterBox.right,BoxPosition.fixed))
-                boxes.append((leftBox,leftBoxSize,BoxOrientationForCenterBox.left,BoxPosition.fixed))
+                boxes.append((4,centerColor,centerBoxSize,BoxOrientationForCenterBox.right))
+                boxes.append((4,leftBox,leftBoxSize,BoxOrientationForCenterBox.left))
             }
             
             return boxes
@@ -67,27 +67,27 @@ struct BoxHorizontalStacker {
                 let rightBox = boxEngine.generateBox()
                 let rightBoxSize = produceBoxSizeReduced()
                 //print("LEFT --> Right Box \(rightBox) \(rightBoxSize)")
-                boxes.append((centerColor,centerBoxSize,BoxOrientationForCenterBox.left,BoxPosition.fixed))
-                boxes.append((rightBox,rightBoxSize,BoxOrientationForCenterBox.right,BoxPosition.fixed))
+                boxes.append((3,centerColor,centerBoxSize,BoxOrientationForCenterBox.left))
+                boxes.append((3,rightBox,rightBoxSize,BoxOrientationForCenterBox.right))
             case .right:
                 let leftBox = boxEngine.generateBox()
                 let leftBoxSize = produceBoxSizeReduced()
                 //print("RIGHT --> Left Box \(leftBox) \(leftBoxSize)")
-                boxes.append((centerColor,centerBoxSize,BoxOrientationForCenterBox.right,BoxPosition.fixed))
-                boxes.append((leftBox,leftBoxSize,BoxOrientationForCenterBox.left,BoxPosition.fixed))
+                boxes.append((3,centerColor,centerBoxSize,BoxOrientationForCenterBox.right))
+                boxes.append((3,leftBox,leftBoxSize,BoxOrientationForCenterBox.left))
             default:
                 //print("3 in center")
-                boxes.append((centerColor,centerBoxSize,BoxOrientationForCenterBox.center,BoxPosition.fixed))
+                boxes.append((3,centerColor,centerBoxSize,BoxOrientationForCenterBox.center))
                 //for right
                 let rightBox = boxEngine.generateBox()
                 let rightBoxSize = produceBoxSizeReduced()
                 //print("CENTER --> Right Box \(rightBox) \(rightBoxSize)")
-                boxes.append((rightBox,rightBoxSize,BoxOrientationForCenterBox.right,BoxPosition.fixed))
+                boxes.append((3,rightBox,rightBoxSize,BoxOrientationForCenterBox.right))
                 //for left
                 let leftBox = boxEngine.generateBox()
                 let leftBoxSize = produceBoxSizeReduced()
                 //print("CENTER --> Left Box \(leftBox) \(leftBoxSize)")
-                boxes.append((leftBox,leftBoxSize,BoxOrientationForCenterBox.left,BoxPosition.fixed))
+                boxes.append((3,leftBox,leftBoxSize,BoxOrientationForCenterBox.left))
                 
             }
             
@@ -99,46 +99,46 @@ struct BoxHorizontalStacker {
             switch orientation {
             case .left :
                 //print("2 in \(orientation)")
-                boxes.append((centerColor,centerBoxSize,BoxOrientationForCenterBox.left,BoxPosition.fixed))
+                boxes.append((2,centerColor,centerBoxSize,BoxOrientationForCenterBox.left))
                 //for right
                 let rightBox = boxEngine.generateBox()
                 let rightBoxSize = produceBoxSizeMedium()
                 //print("LEFT --> Right Box \(rightBox) \(rightBoxSize)")
-                boxes.append((rightBox,rightBoxSize,BoxOrientationForCenterBox.right,BoxPosition.fixed))
+                boxes.append((2,rightBox,rightBoxSize,BoxOrientationForCenterBox.right))
                 //for left
                 let leftBox = boxEngine.generateBox()
                 let leftBoxSize = produceBoxSizeMedium()
                 //print("LEFT --> Left Box \(leftBox) \(leftBoxSize)")
-                boxes.append((leftBox,leftBoxSize,BoxOrientationForCenterBox.left,BoxPosition.fixed))
+                boxes.append((2,leftBox,leftBoxSize,BoxOrientationForCenterBox.left))
                 
             case .right:
                 //print("2 in \(orientation)")
-                boxes.append((centerColor,centerBoxSize,BoxOrientationForCenterBox.right,BoxPosition.fixed))
+                boxes.append((2,centerColor,centerBoxSize,BoxOrientationForCenterBox.right))
                 //for right
                 let rightBox = boxEngine.generateBox()
                 let rightBoxSize = produceBoxSizeMedium()
                 //print("RIGHT --> Right Box \(rightBox) \(rightBoxSize)")
-                boxes.append((rightBox,rightBoxSize,BoxOrientationForCenterBox.right,BoxPosition.fixed))
+                boxes.append((2,rightBox,rightBoxSize,BoxOrientationForCenterBox.right))
                 //for left
                 let leftBox = boxEngine.generateBox()
                 let leftBoxSize = produceBoxSizeMedium()
                 //print("LEFT --> Left Box \(leftBox) \(leftBoxSize)")
-                boxes.append((leftBox,leftBoxSize,BoxOrientationForCenterBox.left,BoxPosition.fixed))
+                boxes.append((2,leftBox,leftBoxSize,BoxOrientationForCenterBox.left))
             }
             return boxes
             
         default:
             //print("1 Box")
-            boxes.append((centerColor,1,BoxOrientationForCenterBox.center,BoxPosition.center))
+            boxes.append((1,centerColor,1,BoxOrientationForCenterBox.center))
             let rightBox = boxEngine.generateBox()
             let rightBoxSize = produceBoxSizeSide()
             //print("RIGHT --> Right Box \(rightBox) \(rightBoxSize)")
-            boxes.append((rightBox,rightBoxSize,BoxOrientationForCenterBox.right,BoxPosition.center))
+            boxes.append((1,rightBox,rightBoxSize,BoxOrientationForCenterBox.right))
             //for left
             let leftBox = boxEngine.generateBox()
             let leftBoxSize = produceBoxSizeSide()
             //print("LEFT --> Left Box \(leftBox) \(leftBoxSize)")
-            boxes.append((leftBox,leftBoxSize,BoxOrientationForCenterBox.left,BoxPosition.center))
+            boxes.append((1,leftBox,leftBoxSize,BoxOrientationForCenterBox.left))
         }
         
         return boxes
@@ -160,7 +160,7 @@ struct BoxHorizontalStacker {
             
             return 0
         }
-        //return 5
+        //return 1
         return Int.random(in: 1...5)
     }
     
