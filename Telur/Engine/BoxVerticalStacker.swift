@@ -13,7 +13,7 @@ struct BoxVerticalStacker{
     
     private var boxSize:CGFloat = 0.0
     private let INCREASE_LEVEL = 3
-    private let ELEVATION = 13
+    private let ELEVATION = 3
     private var scene:SKScene!
     private var parentNode:SKSpriteNode!
     private var initialHeight:CGFloat = 0.0
@@ -60,7 +60,7 @@ struct BoxVerticalStacker{
                 let listOfBoxes:[(Int,BoxColors,Int,BoxOrientationForCenterBox)] = horizontalStacker.generateStack()
                 
                
-                print("\(listOfBoxes)")
+                //print("\(listOfBoxes)")
 
                 var increaseOfHeight:CGFloat = 0.0
 
@@ -79,9 +79,9 @@ struct BoxVerticalStacker{
 
 
                     if stackBox.0 == 4 {
-                        print("4 --> \(stackBox)")
+                        //print("4 --> \(stackBox)")
                         if stackBox.3 == .left {
-                            print("LEFT")
+                            //print("LEFT")
                             let box = putBox(stackBox: stackBox, width: 4)
                             box.position = CGPoint(x: (scene.size.width / 2 )  - (box.size.width) + (box.size.width / 4) , y: heightOfBox )
                             parentNode.addChild(box)
@@ -96,7 +96,7 @@ struct BoxVerticalStacker{
                         }
 
                         if stackBox.3 == .right {
-                            print("RIGHT")
+                          //  print("RIGHT")
                             let box = putBox(stackBox: stackBox, width: 4)
                             box.position = CGPoint(x: (scene.size.width / 2 )  - (box.size.width / 2) + (box.size.width / 8) , y: heightOfBox )
                             parentNode.addChild(box)
@@ -115,7 +115,7 @@ struct BoxVerticalStacker{
 
 
                     if stackBox.0 == 3{
-                        print("3")
+                       // print("3")
                         if stackBox.3 == .left {
 
                             let box = putBox(stackBox: stackBox, width: 3)
@@ -215,13 +215,13 @@ struct BoxVerticalStacker{
 
     }
     
-    func placeEgg(level:Int){
+    func placeEgg(level:Int)-> Egg{
         
         let eggSize = CGSize(width: boxSize, height: boxSize)
         let egg = Egg(imageNamed: "egg",eggSize: eggSize)
         egg.position = CGPoint(x: (scene.size.width / 2 ), y: lastBoxHeight + egg.size.height )
         parentNode.addChild(egg)
-        
+        return egg
     }
 
     

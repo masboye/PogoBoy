@@ -21,8 +21,8 @@ class Egg:SKSpriteNode{
         //box.physicsBody?.linearDamping = 1.0
         physicsBody?.mass = 0.01
         
-        //physicsBody?.categoryBitMask = CollisionCategoryEgg
-        //physicsBody?.contactTestBitMask = CollisionCategoryBatu
+        physicsBody?.categoryBitMask = CollisionCategoryEgg
+        physicsBody?.contactTestBitMask = CollisionCategoryBatu
         //physicsBody?.collisionBitMask = 0
     }
     

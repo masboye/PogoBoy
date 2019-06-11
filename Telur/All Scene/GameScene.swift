@@ -8,6 +8,7 @@
 
 import SpriteKit
 import GameplayKit
+import CoreMotion
 
 class GameScene: SKScene {
     
@@ -17,6 +18,8 @@ class GameScene: SKScene {
     
     
     let foregroundNode = SKSpriteNode()
+    var egg:Egg!
+    let coreMotionManager = CMMotionManager()
     
     
     required init?(coder aDecoder: NSCoder) {
@@ -48,7 +51,10 @@ class GameScene: SKScene {
         var boxEngine = BoxVerticalStacker(boxSize: SIZE_CONST, scene: self, initialHeight: bottomNode.size.height,parent:foregroundNode)
         
         boxEngine.stackBoxes(level: 1)
-        boxEngine.placeEgg(level: 1)
+        egg = boxEngine.placeEgg(level: 1)
+        
+        coreMotionManager.accelerometerUpdateInterval = 0.3
+        coreMotionManager.startAccelerometerUpdates()
         
     }
     
@@ -73,4 +79,29 @@ class GameScene: SKScene {
         addChild(bottomNode)
         
     }
+    
+    override func didSimulatePhysics() {
+        if let accelerometerData = coreMotionManager.accelerometerData {
+            egg.physicsBody!.velocity =
+                CGVector(dx: CGFloat(accelerometerData.acceleration.x * 150.0),
+                         dy: egg.physicsBody!.velocity.dy)
+            
+            
+        }
+        
+        if egg.position.x < -(egg.size.width / 2) {
+            egg.position =
+                CGPoint(x: size.width - egg.size.width / 2,
+                        y: egg.position.y)
+            
+        }else if egg.position.x > self.size.width {
+            egg.position = CGPoint(x: egg.size.width / 2,
+                                          y: egg.position.y);
+        }
+    }
+    
+    deinit {
+        coreMotionManager.stopAccelerometerUpdates()
+    }
+    
 }

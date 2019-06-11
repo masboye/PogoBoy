@@ -55,6 +55,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF693A1A22AF8C2A00D7B4D1 /* All Scene */ = {
+			isa = PBXGroup;
+			children = (
+				EFC8326C22A379970039FA96 /* GameScene.swift */,
+				EFC8326822A379970039FA96 /* GameScene.sks */,
+			);
+			path = "All Scene";
+			sourceTree = "<group>";
+		};
 		EFC8325A22A379960039FA96 = {
 			isa = PBXGroup;
 			children = (
@@ -74,10 +83,9 @@
 		EFC8326522A379960039FA96 /* Telur */ = {
 			isa = PBXGroup;
 			children = (
+				EF693A1A22AF8C2A00D7B4D1 /* All Scene */,
 				EFC8327E22A3AD0D0039FA96 /* Engine */,
 				EFC8326622A379970039FA96 /* AppDelegate.swift */,
-				EFC8326822A379970039FA96 /* GameScene.sks */,
-				EFC8326C22A379970039FA96 /* GameScene.swift */,
 				EFC8326E22A379970039FA96 /* GameViewController.swift */,
 				EFC8327022A379970039FA96 /* Main.storyboard */,
 				EFC8327322A379980039FA96 /* Assets.xcassets */,
