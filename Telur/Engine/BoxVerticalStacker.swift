@@ -13,7 +13,7 @@ struct BoxVerticalStacker{
     
     private var boxSize:CGFloat = 0.0
     private let INCREASE_LEVEL = 3
-    private let ELEVATION = 3
+    private let ELEVATION = 5
     private var scene:SKScene!
     private var parentNode:SKSpriteNode!
     private var initialHeight:CGFloat = 0.0
@@ -41,8 +41,8 @@ struct BoxVerticalStacker{
         let currentLevel = (level / self.INCREASE_LEVEL) + 1
         var heightOfBox = initialHeight
         
-        let batuSize = CGSize(width: boxSize * CGFloat(3), height: boxSize /  2)
-        let baseSideSize = CGSize(width: boxSize , height: boxSize / 2 )
+        let batuSize = CGSize(width: boxSize * CGFloat(2.0) , height: boxSize /  2)
+        let baseSideSize = CGSize(width: boxSize * CGFloat(2.0) , height: boxSize / 2 )
         let base = FondationSpriteNode(imageNamed: "batu center",fondationSize: batuSize,fondationKananSize: baseSideSize,fondationKiriSize: baseSideSize)
         base.position = CGPoint(x: (scene.size.width / 2 )  - (base.size.width / 2) , y: initialHeight )
 

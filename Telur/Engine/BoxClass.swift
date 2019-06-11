@@ -27,7 +27,7 @@ class BoxSpriteNode : SKSpriteNode
             let location = touch.location(in: self.parent!)
             ballStartX =  (position.x) - location.x // Location X of your sprite when touch started
             ballStartY =  (position.y) - location.y // Location Y of your sprite when touch started
-            print("\(ballStartX)-\(ballStartY)")
+            //print("\(ballStartX)-\(ballStartY)")
 
         }
     }
@@ -70,8 +70,8 @@ class BoxSpriteNode : SKSpriteNode
         //box.physicsBody?.linearDamping = 1.0
         //physicsBody?.mass = 0.01
         
-        physicsBody?.categoryBitMask = CollisionCategoryEgg
-        physicsBody?.contactTestBitMask = CollisionCategoryBatu
+        //physicsBody?.categoryBitMask = CollisionCategoryEgg
+        //physicsBody?.contactTestBitMask = CollisionCategoryBatu
         //physicsBody?.collisionBitMask = 0
     }
     

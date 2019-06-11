@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 import CoreMotion
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //let backgroundNode = SKSpriteNode(imageNamed: "background")
     let secondBackgroundNode = SKSpriteNode(imageNamed: "second")
@@ -21,19 +21,65 @@ class GameScene: SKScene {
     var egg:Egg!
     let coreMotionManager = CMMotionManager()
     
+    let startGameTextNode = SKLabelNode(fontNamed: "Copperplate")
+    var winGameTextNode:SKLabelNode!
+    var loseGameTextNode:SKLabelNode!
+    
+    var statusOfWinning = false
+    
+    func addTitle(){
+        startGameTextNode.fontSize = 40
+        startGameTextNode.text = "Tap anywhere to start!"
+        startGameTextNode.horizontalAlignmentMode = .center
+        startGameTextNode.verticalAlignmentMode = .center
+        startGameTextNode.fontColor = .red
+        startGameTextNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        addChild(startGameTextNode)
+    }
+    
+    func showWin(){
+        winGameTextNode = SKLabelNode(fontNamed: "Copperplate")
+        winGameTextNode.fontSize = 40
+        winGameTextNode.text = "You Win!"
+        winGameTextNode.horizontalAlignmentMode = .center
+        winGameTextNode.verticalAlignmentMode = .center
+        winGameTextNode.fontColor = .red
+        winGameTextNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        addChild(winGameTextNode)
+    }
+    
+    func showLose(){
+        loseGameTextNode = SKLabelNode(fontNamed: "Copperplate")
+        loseGameTextNode.fontSize = 40
+        loseGameTextNode.text = "You Lost!"
+        loseGameTextNode.horizontalAlignmentMode = .center
+        loseGameTextNode.verticalAlignmentMode = .center
+        loseGameTextNode.fontColor = .red
+        loseGameTextNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        addChild(loseGameTextNode)
+    }
+    
+    
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         physicsWorld.gravity = CGVector(dx: 0.0, dy: -9.8)
         isUserInteractionEnabled = true
+        physicsWorld.contactDelegate = self
         
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    func didBegin(_ contact: SKPhysicsContact) {
+        let nodeA = contact.bodyA.node!
+        let nodeB = contact.bodyB.node!
         
-
+        if nodeA.name == "batu" && nodeB.name == "egg"{
+            showWin()
+            statusOfWinning = true
+        }
     }
+    
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
@@ -53,8 +99,7 @@ class GameScene: SKScene {
         boxEngine.stackBoxes(level: 1)
         egg = boxEngine.placeEgg(level: 1)
         
-        coreMotionManager.accelerometerUpdateInterval = 0.3
-        coreMotionManager.startAccelerometerUpdates()
+        addTitle()
         
     }
     
@@ -104,4 +149,22 @@ class GameScene: SKScene {
         coreMotionManager.stopAccelerometerUpdates()
     }
     
+    override func update(_ currentTime: TimeInterval) {
+        if egg.position.y < 0{
+            if !statusOfWinning{
+                showLose()
+            }
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if !egg.physicsBody!.isDynamic{
+            egg.physicsBody?.isDynamic = true
+            
+            coreMotionManager.accelerometerUpdateInterval = 0.3
+            coreMotionManager.startAccelerometerUpdates()
+            
+            startGameTextNode.removeFromParent()
+        }
+    }
 }

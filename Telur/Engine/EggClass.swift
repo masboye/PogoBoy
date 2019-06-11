@@ -17,7 +17,7 @@ class Egg:SKSpriteNode{
         super.init(texture: texture, color: UIColor.white, size: eggSize)
         name = "egg"
         physicsBody = SKPhysicsBody(circleOfRadius: self.size.height / 2)
-        physicsBody?.isDynamic = true
+        physicsBody?.isDynamic = false
         //box.physicsBody?.linearDamping = 1.0
         physicsBody?.mass = 0.01
         

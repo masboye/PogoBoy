@@ -37,7 +37,8 @@ class FondationSpriteNode : SKSpriteNode
 //
         
         physicsBody?.isDynamic = false
-        
+        physicsBody?.categoryBitMask = CollisionCategoryBatu
+        //physicsBody?.contactTestBitMask = CollisionCategoryBatu
     }
     
     required init?(coder aDecoder: NSCoder) {
