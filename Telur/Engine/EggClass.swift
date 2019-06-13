@@ -20,6 +20,7 @@ class Egg:SKSpriteNode{
         physicsBody?.isDynamic = false
         //box.physicsBody?.linearDamping = 1.0
         physicsBody?.mass = 0.01
+        physicsBody?.restitution = 1.0
         
         physicsBody?.categoryBitMask = CollisionCategoryEgg
         physicsBody?.contactTestBitMask = CollisionCategoryBatu

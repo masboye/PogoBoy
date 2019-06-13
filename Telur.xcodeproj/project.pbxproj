@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF07530422B0E0EA00CD720F /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF07530322B0E0EA00CD720F /* MenuScene.swift */; };
 		EFB1709A22ABA2AA0046904C /* FoundationClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1709922ABA2AA0046904C /* FoundationClass.swift */; };
 		EFB445D922AB7AB600B9883C /* BoxClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB445D822AB7AB600B9883C /* BoxClass.swift */; };
 		EFB445DB22AB7D4300B9883C /* AllCollisionBitMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB445DA22AB7D4300B9883C /* AllCollisionBitMask.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EF07530322B0E0EA00CD720F /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		EFB1709922ABA2AA0046904C /* FoundationClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationClass.swift; sourceTree = "<group>"; };
 		EFB445D822AB7AB600B9883C /* BoxClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxClass.swift; sourceTree = "<group>"; };
 		EFB445DA22AB7D4300B9883C /* AllCollisionBitMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCollisionBitMask.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 			children = (
 				EFC8326C22A379970039FA96 /* GameScene.swift */,
 				EFC8326822A379970039FA96 /* GameScene.sks */,
+				EF07530322B0E0EA00CD720F /* MenuScene.swift */,
 			);
 			path = "All Scene";
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				EFC8326F22A379970039FA96 /* GameViewController.swift in Sources */,
 				EFC8326722A379970039FA96 /* AppDelegate.swift in Sources */,
 				EFC8328422A3AE1F0039FA96 /* BoxHorizontalStacker.swift in Sources */,
+				EF07530422B0E0EA00CD720F /* MenuScene.swift in Sources */,
 				EFB445DD22AB7F9A00B9883C /* EggClass.swift in Sources */,
 				EFDF8E6A22A4E54B00E23E8D /* BoxVerticalStacker.swift in Sources */,
 			);

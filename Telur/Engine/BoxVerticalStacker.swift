@@ -12,8 +12,8 @@ import GameplayKit
 struct BoxVerticalStacker{
     
     private var boxSize:CGFloat = 0.0
-    private let INCREASE_LEVEL = 3
-    private let ELEVATION = 5
+    private let INCREASE_LEVEL = 2
+    private let ELEVATION = 2
     private var scene:SKScene!
     private var parentNode:SKSpriteNode!
     private var initialHeight:CGFloat = 0.0
@@ -39,6 +39,7 @@ struct BoxVerticalStacker{
     mutating func stackBoxes(level:Int){
         
         let currentLevel = (level / self.INCREASE_LEVEL) + 1
+        let currentElevation = currentLevel + ELEVATION
         var heightOfBox = initialHeight
         
         let batuSize = CGSize(width: boxSize * CGFloat(2.0) , height: boxSize /  2)
@@ -52,10 +53,10 @@ struct BoxVerticalStacker{
         
         
         
-        for _ in 1...currentLevel{
+        //for _ in 1...currentLevel{
 
 
-            for _ in 1...ELEVATION{
+            for _ in 1...currentElevation{
 
                 let listOfBoxes:[(Int,BoxColors,Int,BoxOrientationForCenterBox)] = horizontalStacker.generateStack()
                 
@@ -209,7 +210,7 @@ struct BoxVerticalStacker{
 
             }
 
-        }
+       // }
         
         lastBoxHeight = heightOfBox
 

@@ -55,11 +55,11 @@ class BoxSpriteNode : SKSpriteNode
         
         let texture = SKTexture(imageNamed: imageNamed)
         super.init(texture: texture, color: UIColor.white, size: boxSize)
-        name = "\(imageNamed) box"
+        name = "\(imageNamed)"
         
         anchorPoint = CGPoint(x: 0, y: 0)
         
-        isUserInteractionEnabled = true
+        isUserInteractionEnabled = false
         
         
         
@@ -78,5 +78,6 @@ class BoxSpriteNode : SKSpriteNode
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
 }

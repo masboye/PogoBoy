@@ -25,7 +25,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var winGameTextNode:SKLabelNode!
     var loseGameTextNode:SKLabelNode!
     
-    var statusOfWinning = false
+    //var statusOfWinning = false
+    var boxLeft = 3
+    let boxLeftText = SKLabelNode(fontNamed: "CopperPlate")
+    
+    var startGame = false
+    
+    var countDown = 100
+    var score = 0
+    var level = 1
+    private let INCREASE_LEVEL = 3
+    
+    func addScore(){
+        
+        
+        boxLeftText.text = "Box Left : \(boxLeft) Time : \(countDown)"
+        boxLeftText.fontColor = .green
+        boxLeftText.fontSize = 30
+        boxLeftText.position = CGPoint(x: boxLeftText.fontSize * 2.5 , y: size.height - boxLeftText.fontSize - 50 )
+        boxLeftText.horizontalAlignmentMode = .left
+        addChild(boxLeftText)
+        
+    }
     
     func addTitle(){
         startGameTextNode.fontSize = 40
@@ -35,54 +56,57 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         startGameTextNode.fontColor = .red
         startGameTextNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
         addChild(startGameTextNode)
+        startGameTextNode.zPosition = 10
     }
-    
-    func showWin(){
-        winGameTextNode = SKLabelNode(fontNamed: "Copperplate")
-        winGameTextNode.fontSize = 40
-        winGameTextNode.text = "You Win!"
-        winGameTextNode.horizontalAlignmentMode = .center
-        winGameTextNode.verticalAlignmentMode = .center
-        winGameTextNode.fontColor = .red
-        winGameTextNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
-        addChild(winGameTextNode)
-    }
-    
-    func showLose(){
-        loseGameTextNode = SKLabelNode(fontNamed: "Copperplate")
-        loseGameTextNode.fontSize = 40
-        loseGameTextNode.text = "You Lost!"
-        loseGameTextNode.horizontalAlignmentMode = .center
-        loseGameTextNode.verticalAlignmentMode = .center
-        loseGameTextNode.fontColor = .red
-        loseGameTextNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
-        addChild(loseGameTextNode)
-    }
-    
     
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        setup()
+        self.level = 0
+        self.boxLeft = (level / self.INCREASE_LEVEL) + self.boxLeft
+        self.score = 0
+        
+        self.countDown =  ((level / self.INCREASE_LEVEL) * 20) + self.countDown
+        
+    }
+    
+    func setup(){
         physicsWorld.gravity = CGVector(dx: 0.0, dy: -9.8)
         isUserInteractionEnabled = true
         physicsWorld.contactDelegate = self
+    }
+    
+    init(size: CGSize,level:Int,score:Int) {
+        super.init(size: size)
         
+        
+        setup()
+        self.level = level
+        self.boxLeft = (level / self.INCREASE_LEVEL) + self.boxLeft
+        self.score = score
+        
+        self.countDown =  ((level / self.INCREASE_LEVEL) * 20) + self.countDown
+        //print(size)
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
         let nodeA = contact.bodyA.node!
         let nodeB = contact.bodyB.node!
-        
+        print("\(nodeA.name) \(nodeB.name)")
         if nodeA.name == "batu" && nodeB.name == "egg"{
-            showWin()
-            statusOfWinning = true
+        print("contact")
+            self.score += self.countDown
+            self.gameOverWithResult(true)
+            
         }
     }
     
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
+        //print(size)
         scene?.anchorPoint = CGPoint(x: 0, y: 0)
         backgroundColor = SKColor(ciColor: .white)
         
@@ -96,11 +120,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         var boxEngine = BoxVerticalStacker(boxSize: SIZE_CONST, scene: self, initialHeight: bottomNode.size.height,parent:foregroundNode)
         
-        boxEngine.stackBoxes(level: 1)
-        egg = boxEngine.placeEgg(level: 1)
+        boxEngine.stackBoxes(level: self.level)
+        egg = boxEngine.placeEgg(level: self.level)
         
         addTitle()
-        
+        addScore()
     }
     
 //    func addBackground(){
@@ -150,21 +174,83 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        if egg.position.y < 0{
-            if !statusOfWinning{
-                showLose()
+       
+        
+            if egg.position.y < 0{
+               
+                    self.gameOverWithResult(false)
+                
             }
+        
+        if countDown <= 0 {
+            self.gameOverWithResult(false)
         }
+            
+            //get list of all children and check it's position
+            
+            foregroundNode.enumerateChildNodes(withName: "*box") { (node, stop) in
+                let box = node as! BoxSpriteNode
+                if box.position.y < 0 {
+                    //print("\(box.name) is out of bounds")
+                    if self.boxLeft > 0 {
+                        if self.startGame{
+                            box.removeFromParent()
+                            self.boxLeft -= 1
+                            self.boxLeftText.text = "Box Left : \(self.boxLeft) Time : \(self.countDown)"
+                            //print("started")
+                        }else{
+                            //print("Not started")
+                            box.removeFromParent()
+                        }
+                        
+                    }else{
+                        self.gameOverWithResult(false)
+                    }
+                    
+                }
+            }
+        
+       
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !egg.physicsBody!.isDynamic{
+        if !startGame{
             egg.physicsBody?.isDynamic = true
             
             coreMotionManager.accelerometerUpdateInterval = 0.3
             coreMotionManager.startAccelerometerUpdates()
             
             startGameTextNode.removeFromParent()
+            
+            //get list of all children and check it's position
+            
+            foregroundNode.enumerateChildNodes(withName: "*box") { (node, stop) in
+                let box = node as! BoxSpriteNode
+                //box.physicsBody?.isDynamic = true
+                box.isUserInteractionEnabled = true
+            }
+            
+            startGame = true
+            
+             Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.countDown(_:)), userInfo: nil, repeats: true)
         }
+    }
+    
+    @objc func countDown(_ timer:Timer){
+        
+        self.countDown -= 1
+        self.boxLeftText.text = "Box Left : \(boxLeft) Time : \(countDown)"
+    }
+    
+    func gameOverWithResult(_ result: Bool){
+        
+       
+        let transition = SKTransition.crossFade(withDuration: 2.0)
+        let menuScene = MenuScene(size: size,
+                                  gameResult: result,
+                                  score: score,level: level)
+        view?.presentScene(menuScene, transition: transition)
+        
     }
 }
