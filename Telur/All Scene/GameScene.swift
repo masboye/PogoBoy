@@ -39,17 +39,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func addScore(){
         
         
-        boxLeftText.text = "Box Left : \(boxLeft) Time : \(countDown)"
+        boxLeftText.text = "Box Left : \(boxLeft) Time : \(countDown) Score : \(score)"
         boxLeftText.fontColor = .green
-        boxLeftText.fontSize = 30
-        boxLeftText.position = CGPoint(x: boxLeftText.fontSize * 2.5 , y: size.height - boxLeftText.fontSize - 50 )
+        boxLeftText.fontSize = 20
+        boxLeftText.position = CGPoint(x: boxLeftText.fontSize * 2 , y: size.height - boxLeftText.fontSize - 50 )
         boxLeftText.horizontalAlignmentMode = .left
         addChild(boxLeftText)
         
     }
     
     func addTitle(){
-        startGameTextNode.fontSize = 40
+        startGameTextNode.fontSize = 30
         startGameTextNode.text = "Tap anywhere to start!"
         startGameTextNode.horizontalAlignmentMode = .center
         startGameTextNode.verticalAlignmentMode = .center
@@ -94,11 +94,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         let nodeA = contact.bodyA.node!
         let nodeB = contact.bodyB.node!
-        print("\(nodeA.name) \(nodeB.name)")
+        
+        print("\(nodeA.name) --> \(nodeB.name)")
         if nodeA.name == "batu" && nodeB.name == "egg"{
-        print("contact")
+       
             self.score += self.countDown
             self.gameOverWithResult(true)
+            
+        }
+        
+        if (nodeA.name?.contains("box"))!  && (nodeB.name?.contains("box"))!{
+            
+            let box1 =  nodeA as! BoxSpriteNode
+            let box2 = nodeB as! BoxSpriteNode
+            
+            //when the box collide
+            if (!box1.intersects(box2)){
+                print("intersect")
+                box2.isUserInteractionEnabled = false
+                box1.isUserInteractionEnabled = false
+                
+            }
+            
             
         }
     }
@@ -196,7 +213,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         if self.startGame{
                             box.removeFromParent()
                             self.boxLeft -= 1
-                            self.boxLeftText.text = "Box Left : \(self.boxLeft) Time : \(self.countDown)"
+                            self.score -= 20
+                            self.boxLeftText.text = "Box Left : \(self.boxLeft) Time : \(self.countDown) Score : \(self.score)"
                             //print("started")
                         }else{
                             //print("Not started")
@@ -240,7 +258,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     @objc func countDown(_ timer:Timer){
         
         self.countDown -= 1
-        self.boxLeftText.text = "Box Left : \(boxLeft) Time : \(countDown)"
+        self.boxLeftText.text = "Box Left : \(self.boxLeft) Time : \(self.countDown) Score : \(self.score)"
     }
     
     func gameOverWithResult(_ result: Bool){

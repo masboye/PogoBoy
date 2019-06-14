@@ -17,6 +17,7 @@ class BoxSpriteNode : SKSpriteNode
     var ballStartY: CGFloat = 0.0
 
     
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         //print("Touched \(self.name) \(self.parent?.children.count)")
 
@@ -70,8 +71,8 @@ class BoxSpriteNode : SKSpriteNode
         //box.physicsBody?.linearDamping = 1.0
         //physicsBody?.mass = 0.01
         
-        //physicsBody?.categoryBitMask = CollisionCategoryEgg
-        //physicsBody?.contactTestBitMask = CollisionCategoryBatu
+        physicsBody?.categoryBitMask = CollisionCategoryBox
+        physicsBody?.contactTestBitMask = CollisionCategoryBox
         //physicsBody?.collisionBitMask = 0
     }
     
