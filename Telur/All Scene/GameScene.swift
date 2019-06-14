@@ -35,6 +35,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var score = 0
     var level = 1
     private let INCREASE_LEVEL = 3
+    let fire = SKEmitterNode(fileNamed: "fire")
     
     func addScore(){
         
@@ -76,6 +77,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.gravity = CGVector(dx: 0.0, dy: -9.8)
         isUserInteractionEnabled = true
         physicsWorld.contactDelegate = self
+        addChild(fire!)
+        //self.fire?.position = CGPoint(x: size.width / 2, y: size.height / 2)
     }
     
     init(size: CGSize,level:Int,score:Int) {
@@ -108,11 +111,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let box1 =  nodeA as! BoxSpriteNode
             let box2 = nodeB as! BoxSpriteNode
             
+            
             //when the box collide
-            if (!box1.intersects(box2)){
+            if (box2.intersects(box1)){
                 print("intersect")
-                box2.isUserInteractionEnabled = false
-                box1.isUserInteractionEnabled = false
+                //box2.isUserInteractionEnabled = false
+                
+                box2.canMove = false
+               
                 
             }
             
@@ -120,6 +126,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    func didEnd(_ contact: SKPhysicsContact) {
+        let nodeA = contact.bodyA.node!
+        let nodeB = contact.bodyB.node!
+        
+        if (nodeA.name?.contains("box"))!  && (nodeB.name?.contains("box"))!{
+            
+            let box1 =  nodeA as! BoxSpriteNode
+            let box2 = nodeB as! BoxSpriteNode
+            
+                box2.canMove = true
+                box1.canMove = true
+            
+        }
+    }
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
@@ -162,9 +182,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // adding the background
         bottomNode.anchorPoint = CGPoint(x: 0.0, y: 0.0)
         bottomNode.size.height = bottomNode.size.height * 2
+       
+       // bottomNode.addChild(fire!)
+        //fire?.targetNode = scene
         addChild(bottomNode)
         
+//        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.fireCountDown(_:)), userInfo: nil, repeats: true)
     }
+    
+//    @objc func fireCountDown(_ timer:Timer){
+//        print("\(self.fire?.isHidden)")
+//        self.fire?.isHidden = !self.fire!.isHidden
+//    }
     
     override func didSimulatePhysics() {
         if let accelerometerData = coreMotionManager.accelerometerData {
@@ -175,15 +204,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         }
         
-        if egg.position.x < -(egg.size.width / 2) {
-            egg.position =
-                CGPoint(x: size.width - egg.size.width / 2,
-                        y: egg.position.y)
-            
-        }else if egg.position.x > self.size.width {
-            egg.position = CGPoint(x: egg.size.width / 2,
-                                          y: egg.position.y);
-        }
+//        if egg.position.x < -(egg.size.width / 2) {
+//            egg.position =
+//                CGPoint(x: size.width - egg.size.width / 2,
+//                        y: egg.position.y)
+//
+//        }else if egg.position.x > self.size.width {
+//            egg.position = CGPoint(x: egg.size.width / 2,
+//                                          y: egg.position.y);
+//        }
     }
     
     deinit {
@@ -234,7 +263,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !startGame{
-            egg.physicsBody?.isDynamic = true
+            egg.physicsBody?.isDynamic = false
             
             coreMotionManager.accelerometerUpdateInterval = 0.3
             coreMotionManager.startAccelerometerUpdates()
