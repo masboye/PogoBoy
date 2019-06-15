@@ -46,7 +46,7 @@ struct BoxVerticalStacker{
         let baseSideSize = CGSize(width: boxSize * CGFloat(2.0) , height: boxSize / 2 )
         let base = FondationSpriteNode(imageNamed: "batu center",fondationSize: batuSize,fondationKananSize: baseSideSize,fondationKiriSize: baseSideSize)
         base.position = CGPoint(x: (scene.size.width / 2 )  - (base.size.width / 2) , y: initialHeight )
-
+        
         parentNode.addChild(base)
         
         heightOfBox += base.size.height
@@ -54,166 +54,166 @@ struct BoxVerticalStacker{
         
         
         //for _ in 1...currentLevel{
-
-
-            for _ in 1...currentElevation{
-
-                let listOfBoxes:[(Int,BoxColors,Int,BoxOrientationForCenterBox)] = horizontalStacker.generateStack()
+        
+        
+        for _ in 1...currentElevation{
+            
+            let listOfBoxes:[(Int,BoxColors,Int,BoxOrientationForCenterBox)] = horizontalStacker.generateStack()
+            
+            
+            //print("\(listOfBoxes)")
+            
+            var increaseOfHeight:CGFloat = 0.0
+            
+            for stackBox in listOfBoxes{
+                //print(stackBox)
                 
-               
-                //print("\(listOfBoxes)")
-
-                var increaseOfHeight:CGFloat = 0.0
-
-                for stackBox in listOfBoxes{
-                    //print(stackBox)
+                if stackBox.0 == 5{
+                    //print("5")
+                    let box = putBox(stackBox: stackBox, width: 5)
+                    box.position = CGPoint(x: (scene.size.width / 2 )  - (box.size.width / 2) , y: heightOfBox )
                     
-                    if stackBox.0 == 5{
-                        //print("5")
-                        let box = putBox(stackBox: stackBox, width: 5)
-                        box.position = CGPoint(x: (scene.size.width / 2 )  - (box.size.width / 2) , y: heightOfBox )
-
+                    parentNode.addChild(box)
+                    increaseOfHeight = box.size.height
+                    
+                }
+                
+                
+                if stackBox.0 == 4 {
+                    //print("4 --> \(stackBox)")
+                    if stackBox.3 == .left {
+                        //print("LEFT")
+                        let box = putBox(stackBox: stackBox, width: 4)
+                        box.position = CGPoint(x: (scene.size.width / 2 )  - (box.size.width) + (box.size.width / 4) , y: heightOfBox )
                         parentNode.addChild(box)
+                        
                         increaseOfHeight = box.size.height
-
-                    }
-
-
-                    if stackBox.0 == 4 {
-                        //print("4 --> \(stackBox)")
-                        if stackBox.3 == .left {
-                            //print("LEFT")
-                            let box = putBox(stackBox: stackBox, width: 4)
-                            box.position = CGPoint(x: (scene.size.width / 2 )  - (box.size.width) + (box.size.width / 4) , y: heightOfBox )
-                            parentNode.addChild(box)
-
-                            increaseOfHeight = box.size.height
-
-                            let nextBox = putBox(stackBox: listOfBoxes[1], width: listOfBoxes[1].2)
-                            nextBox.position = CGPoint(x: box.position.x + box.size.width , y: heightOfBox )
-                            parentNode.addChild(nextBox)
-                            break
-
-                        }
-
-                        if stackBox.3 == .right {
-                          //  print("RIGHT")
-                            let box = putBox(stackBox: stackBox, width: 4)
-                            box.position = CGPoint(x: (scene.size.width / 2 )  - (box.size.width / 2) + (box.size.width / 8) , y: heightOfBox )
-                            parentNode.addChild(box)
-
-                            increaseOfHeight = box.size.height
-
-                            let nextBox = putBox(stackBox: listOfBoxes[1], width: listOfBoxes[1].2)
-                            nextBox.position = CGPoint(x: box.position.x - nextBox.size.width , y: heightOfBox )
-                            parentNode.addChild(nextBox)
-                            break
-
-                        }
-
-                    }
-                    
-
-
-                    if stackBox.0 == 3{
-                       // print("3")
-                        if stackBox.3 == .left {
-
-                            let box = putBox(stackBox: stackBox, width: 3)
-                            box.position = CGPoint(x: (scene.size.width / 2 )  - (box.size.width / 2) , y: heightOfBox )
-                            parentNode.addChild(box)
-
-                            increaseOfHeight = box.size.height
-
-                            let nextBox = putBox(stackBox: listOfBoxes[1], width: listOfBoxes[1].2)
-                            nextBox.position = CGPoint(x: box.position.x + box.size.width , y: heightOfBox )
-                            parentNode.addChild(nextBox)
-                            break
-                        }
-
-                        if stackBox.3 == .right {
-
-                            let box = putBox(stackBox: stackBox, width: 3)
-                            box.position = CGPoint(x: (scene.size.width / 2 )  - (box.size.width / 2)  , y: heightOfBox )
-                            parentNode.addChild(box)
-
-                            increaseOfHeight = box.size.height
-
-                            let nextBox = putBox(stackBox: listOfBoxes[1], width: listOfBoxes[1].2)
-                            nextBox.position =  CGPoint(x: box.position.x - nextBox.size.width , y: heightOfBox )
-                            parentNode.addChild(nextBox)
-                            break
-                        }
-
-                    }
-
-
-                    if stackBox.0 == 2 {
-
-                        if stackBox.3 == .left {
-
-                            let box = putBox(stackBox: stackBox, width: 2)
-                            box.position = CGPoint(x: (scene.size.width / 2 )  - (box.size.width / 2) , y: heightOfBox )
-                            parentNode.addChild(box)
-
-                            increaseOfHeight = box.size.height
-
-                            let nextBox = putBox(stackBox: listOfBoxes[1], width: listOfBoxes[1].2)
-                            nextBox.position =  CGPoint(x: box.position.x + box.size.width , y: heightOfBox )
-                            parentNode.addChild(nextBox)
-                            break
-
-                        }
-
-                        if stackBox.3 == .right {
-
-                            let box = putBox(stackBox: stackBox, width: 2)
-                            box.position = CGPoint(x: (scene.size.width / 2 )  - (box.size.width / 2) , y: heightOfBox )
-                            parentNode.addChild(box)
-
-                            increaseOfHeight = box.size.height
-
-                            let nextBox = putBox(stackBox: listOfBoxes[2], width: listOfBoxes[2].2)
-                            nextBox.position =  CGPoint(x: box.position.x - nextBox.size.width , y: heightOfBox )
-                            parentNode.addChild(nextBox)
-                            break
-
-                        }
-
-                    }
-                    
-
-
-                     if stackBox.0 == 1 {
-                    //print("1")
-                        let box = putBox(stackBox: stackBox, width: 1)
-                        box.position = CGPoint(x: (scene.size.width / 2 )  - (box.size.width / 2) , y: heightOfBox )
-                        parentNode.addChild(box)
-
-                        increaseOfHeight = box.size.height
-
-                        var nextBox = putBox(stackBox: listOfBoxes[1], width: listOfBoxes[1].2)
-                        nextBox.position =  CGPoint(x: box.position.x + box.size.width , y: heightOfBox )
+                        
+                        let nextBox = putBox(stackBox: listOfBoxes[1], width: listOfBoxes[1].2)
+                        nextBox.position = CGPoint(x: box.position.x + box.size.width , y: heightOfBox )
                         parentNode.addChild(nextBox)
-
-                        nextBox = putBox(stackBox: listOfBoxes[2], width: listOfBoxes[2].2)
-                        nextBox.position =   CGPoint(x: box.position.x - nextBox.size.width , y: heightOfBox )
+                        break
+                        
+                    }
+                    
+                    if stackBox.3 == .right {
+                        //  print("RIGHT")
+                        let box = putBox(stackBox: stackBox, width: 4)
+                        box.position = CGPoint(x: (scene.size.width / 2 )  - (box.size.width / 2) + (box.size.width / 8) , y: heightOfBox )
+                        parentNode.addChild(box)
+                        
+                        increaseOfHeight = box.size.height
+                        
+                        let nextBox = putBox(stackBox: listOfBoxes[1], width: listOfBoxes[1].2)
+                        nextBox.position = CGPoint(x: box.position.x - nextBox.size.width , y: heightOfBox )
+                        parentNode.addChild(nextBox)
+                        break
+                        
+                    }
+                    
+                }
+                
+                
+                
+                if stackBox.0 == 3{
+                    // print("3")
+                    if stackBox.3 == .left {
+                        
+                        let box = putBox(stackBox: stackBox, width: 3)
+                        box.position = CGPoint(x: (scene.size.width / 2 )  - (box.size.width / 2) , y: heightOfBox )
+                        parentNode.addChild(box)
+                        
+                        increaseOfHeight = box.size.height
+                        
+                        let nextBox = putBox(stackBox: listOfBoxes[1], width: listOfBoxes[1].2)
+                        nextBox.position = CGPoint(x: box.position.x + box.size.width , y: heightOfBox )
                         parentNode.addChild(nextBox)
                         break
                     }
-
-
-
+                    
+                    if stackBox.3 == .right {
+                        
+                        let box = putBox(stackBox: stackBox, width: 3)
+                        box.position = CGPoint(x: (scene.size.width / 2 )  - (box.size.width / 2)  , y: heightOfBox )
+                        parentNode.addChild(box)
+                        
+                        increaseOfHeight = box.size.height
+                        
+                        let nextBox = putBox(stackBox: listOfBoxes[1], width: listOfBoxes[1].2)
+                        nextBox.position =  CGPoint(x: box.position.x - nextBox.size.width , y: heightOfBox )
+                        parentNode.addChild(nextBox)
+                        break
+                    }
+                    
                 }
-                //print(heightOfBox)
-                heightOfBox += increaseOfHeight
-
+                
+                
+                if stackBox.0 == 2 {
+                    
+                    if stackBox.3 == .left {
+                        
+                        let box = putBox(stackBox: stackBox, width: 2)
+                        box.position = CGPoint(x: (scene.size.width / 2 )  - (box.size.width / 2) , y: heightOfBox )
+                        parentNode.addChild(box)
+                        
+                        increaseOfHeight = box.size.height
+                        
+                        let nextBox = putBox(stackBox: listOfBoxes[1], width: listOfBoxes[1].2)
+                        nextBox.position =  CGPoint(x: box.position.x + box.size.width , y: heightOfBox )
+                        parentNode.addChild(nextBox)
+                        break
+                        
+                    }
+                    
+                    if stackBox.3 == .right {
+                        
+                        let box = putBox(stackBox: stackBox, width: 2)
+                        box.position = CGPoint(x: (scene.size.width / 2 )  - (box.size.width / 2) , y: heightOfBox )
+                        parentNode.addChild(box)
+                        
+                        increaseOfHeight = box.size.height
+                        
+                        let nextBox = putBox(stackBox: listOfBoxes[2], width: listOfBoxes[2].2)
+                        nextBox.position =  CGPoint(x: box.position.x - nextBox.size.width , y: heightOfBox )
+                        parentNode.addChild(nextBox)
+                        break
+                        
+                    }
+                    
+                }
+                
+                
+                
+                if stackBox.0 == 1 {
+                    //print("1")
+                    let box = putBox(stackBox: stackBox, width: 1)
+                    box.position = CGPoint(x: (scene.size.width / 2 )  - (box.size.width / 2) , y: heightOfBox )
+                    parentNode.addChild(box)
+                    
+                    increaseOfHeight = box.size.height
+                    
+                    var nextBox = putBox(stackBox: listOfBoxes[1], width: listOfBoxes[1].2)
+                    nextBox.position =  CGPoint(x: box.position.x + box.size.width , y: heightOfBox )
+                    parentNode.addChild(nextBox)
+                    
+                    nextBox = putBox(stackBox: listOfBoxes[2], width: listOfBoxes[2].2)
+                    nextBox.position =   CGPoint(x: box.position.x - nextBox.size.width , y: heightOfBox )
+                    parentNode.addChild(nextBox)
+                    break
+                }
+                
+                
+                
             }
-
-       // }
+            //print(heightOfBox)
+            heightOfBox += increaseOfHeight
+            
+        }
+        
+        // }
         
         lastBoxHeight = heightOfBox
-
+        
     }
     
     func placeEgg(level:Int)-> Egg{
@@ -224,7 +224,7 @@ struct BoxVerticalStacker{
         parentNode.addChild(egg)
         return egg
     }
-
+    
     
     
 }

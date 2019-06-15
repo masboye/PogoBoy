@@ -37,16 +37,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private let INCREASE_LEVEL = 3
     let fire = SKEmitterNode(fileNamed: "fire")
     
+    var cam:SKCameraNode!
+    var swipeCount = 0
+    var swipeSide = 0
+    
     func addScore(){
         
-        
         boxLeftText.text = "Box Left : \(boxLeft) Time : \(countDown) Score : \(score)"
-        boxLeftText.fontColor = .green
+        boxLeftText.fontColor = .white
         boxLeftText.fontSize = 20
-        boxLeftText.position = CGPoint(x: boxLeftText.fontSize * 2 , y: size.height - boxLeftText.fontSize - 50 )
+        boxLeftText.position = CGPoint(x: boxLeftText.fontSize * 2 , y:  50 )
         boxLeftText.horizontalAlignmentMode = .left
         addChild(boxLeftText)
-        
+        boxLeftText.zPosition = 10
     }
     
     func addTitle(){
@@ -65,7 +68,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         super.init(coder: aDecoder)
         
         setup()
-        self.level = 0
+        self.level = 1
         self.boxLeft = (level / self.INCREASE_LEVEL) + self.boxLeft
         self.score = 0
         
@@ -78,7 +81,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         isUserInteractionEnabled = true
         physicsWorld.contactDelegate = self
         addChild(fire!)
-        //self.fire?.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        self.name = "gameScene"
     }
     
     init(size: CGSize,level:Int,score:Int) {
@@ -98,48 +101,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let nodeA = contact.bodyA.node!
         let nodeB = contact.bodyB.node!
         
-        print("\(nodeA.name) --> \(nodeB.name)")
+        //print("\(nodeA.name) --> \(nodeB.name)")
         if nodeA.name == "batu" && nodeB.name == "egg"{
-       
+            
             self.score += self.countDown
             self.gameOverWithResult(true)
             
         }
         
-        if (nodeA.name?.contains("box"))!  && (nodeB.name?.contains("box"))!{
+        if (nodeA.name?.contains("box"))! && nodeB.name == "egg"{
             
-            let box1 =  nodeA as! BoxSpriteNode
-            let box2 = nodeB as! BoxSpriteNode
+            let egg = nodeB as! Egg
             
-            
-            //when the box collide
-            if (box2.intersects(box1)){
-                print("intersect")
-                //box2.isUserInteractionEnabled = false
-                
-                box2.canMove = false
-               
-                
-            }
-            
+            egg.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 0.1))
             
         }
     }
     
-    func didEnd(_ contact: SKPhysicsContact) {
-        let nodeA = contact.bodyA.node!
-        let nodeB = contact.bodyB.node!
-        
-        if (nodeA.name?.contains("box"))!  && (nodeB.name?.contains("box"))!{
-            
-            let box1 =  nodeA as! BoxSpriteNode
-            let box2 = nodeB as! BoxSpriteNode
-            
-                box2.canMove = true
-                box1.canMove = true
-            
-        }
-    }
+    
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
@@ -162,14 +141,78 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         addTitle()
         addScore()
+        
+        cam = SKCameraNode()
+        self.anchorPoint = CGPoint(x: 0, y: 0)
+        self.camera = cam
+        self.addChild(cam)
+        
+        let point = CGPoint(x: (size.width / 2), y: size.height / 2)
+        self.camera?.position = point
+        //print("\(self.camera?.position)")
+        
+        //self.camera?.position = CGPoint(x: -500, y: 0)
+        
+        let swipedDown:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeDown))
+        //swipedDown.direction = .down
+        swipedDown.direction = .down
+        view.addGestureRecognizer(swipedDown)
+        
+        let swipedUp:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeUp))
+        //swipedDown.direction = .down
+        swipedUp.direction = .up
+        view.addGestureRecognizer(swipedUp)
+        
+        //        let swipedLeft:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeLeft))
+        //        //swipedDown.direction = .down
+        //        swipedLeft.direction = .left
+        //        view.addGestureRecognizer(swipedLeft)
+        //
+        //        let swipedRight:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeRight))
+        //        //swipedDown.direction = .down
+        //        swipedRight.direction = .right
+        //        view.addGestureRecognizer(swipedRight)
     }
     
-//    func addBackground(){
-//        // adding the background
-//        backgroundNode.anchorPoint = CGPoint(x: 0.0, y: 0.0)
-//        addChild(backgroundNode)
-//        
-//    }
+    //    @objc func swipeLeft(sender:UISwipeGestureRecognizer){
+    //        if (self.camera?.contains(egg))!{
+    //            self.camera!.position.x = (self.camera?.position.x)! + 150
+    //            self.swipeSide += 1
+    //        }
+    //
+    //    }
+    //
+    //    @objc func swipeRight(sender:UISwipeGestureRecognizer){
+    //        if swipeSide > 0 {
+    //            self.camera!.position.x = (self.camera?.position.x)! - 150
+    //            swipeSide -= 1
+    //        }else{
+    //            swipeSide = 0
+    //        }
+    //
+    //
+    //    }
+    
+    @objc func swipeDown(sender:UISwipeGestureRecognizer){
+        
+        if (self.camera?.contains(egg))!{
+            self.camera!.position.y = (self.camera?.position.y)! + 150
+            self.swipeCount += 1
+        }
+        
+    }
+    
+    @objc func swipeUp(sender:UISwipeGestureRecognizer){
+        
+        if swipeCount > 0 {
+            self.camera!.position.y = (self.camera?.position.y)! - 150
+            swipeCount -= 1
+        }else{
+            swipeCount = 0
+        }
+        
+        
+    }
     func addSecondBackground(){
         // adding the second background
         secondBackgroundNode.anchorPoint = CGPoint(x: 0.0, y: 0.0)
@@ -182,18 +225,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // adding the background
         bottomNode.anchorPoint = CGPoint(x: 0.0, y: 0.0)
         bottomNode.size.height = bottomNode.size.height * 2
-       
-       // bottomNode.addChild(fire!)
-        //fire?.targetNode = scene
+        
         addChild(bottomNode)
         
-//        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.fireCountDown(_:)), userInfo: nil, repeats: true)
     }
     
-//    @objc func fireCountDown(_ timer:Timer){
-//        print("\(self.fire?.isHidden)")
-//        self.fire?.isHidden = !self.fire!.isHidden
-//    }
+    
     
     override func didSimulatePhysics() {
         if let accelerometerData = coreMotionManager.accelerometerData {
@@ -204,15 +241,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         }
         
-//        if egg.position.x < -(egg.size.width / 2) {
-//            egg.position =
-//                CGPoint(x: size.width - egg.size.width / 2,
-//                        y: egg.position.y)
-//
-//        }else if egg.position.x > self.size.width {
-//            egg.position = CGPoint(x: egg.size.width / 2,
-//                                          y: egg.position.y);
-//        }
+        //        if egg.position.x < -(egg.size.width / 2) {
+        //            egg.position =
+        //                CGPoint(x: size.width - egg.size.width / 2,
+        //                        y: egg.position.y)
+        //
+        //        }else if egg.position.x > self.size.width {
+        //            egg.position = CGPoint(x: egg.size.width / 2,
+        //                                          y: egg.position.y);
+        //        }
     }
     
     deinit {
@@ -220,50 +257,52 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
-       
         
-            if egg.position.y < 0{
-               
-                    self.gameOverWithResult(false)
-                
-            }
+        
+        if egg.position.y < 0{
+            
+            self.gameOverWithResult(false)
+            
+        }
         
         if countDown <= 0 {
             self.gameOverWithResult(false)
         }
-            
-            //get list of all children and check it's position
-            
-            foregroundNode.enumerateChildNodes(withName: "*box") { (node, stop) in
-                let box = node as! BoxSpriteNode
-                if box.position.y < 0 {
-                    //print("\(box.name) is out of bounds")
-                    if self.boxLeft > 0 {
-                        if self.startGame{
-                            box.removeFromParent()
-                            self.boxLeft -= 1
-                            self.score -= 20
-                            self.boxLeftText.text = "Box Left : \(self.boxLeft) Time : \(self.countDown) Score : \(self.score)"
-                            //print("started")
-                        }else{
-                            //print("Not started")
-                            box.removeFromParent()
-                        }
-                        
+        
+        //get list of all children and check it's position
+        
+        foregroundNode.enumerateChildNodes(withName: "*box") { (node, stop) in
+            let box = node as! BoxSpriteNode
+            if box.position.y < 0 {
+                //print("\(box.name) is out of bounds")
+                if self.boxLeft > 0 {
+                    if self.startGame{
+                        box.removeFromParent()
+                        self.boxLeft -= 1
+                        self.score -= 5
+                        self.boxLeftText.text = "Box Left : \(self.boxLeft) Time : \(self.countDown) Score : \(self.score)"
+                        //print("started")
                     }else{
-                        self.gameOverWithResult(false)
+                        //print("Not started")
+                        box.removeFromParent()
                     }
                     
+                }else{
+                    self.gameOverWithResult(false)
                 }
+                
             }
+        }
         
-       
+        //self.camera?.position = egg.position
+        
+        
         
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !startGame{
-            egg.physicsBody?.isDynamic = false
+            egg.physicsBody?.isDynamic = true
             
             coreMotionManager.accelerometerUpdateInterval = 0.3
             coreMotionManager.startAccelerometerUpdates()
@@ -280,7 +319,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             startGame = true
             
-             Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.countDown(_:)), userInfo: nil, repeats: true)
+            Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.countDown(_:)), userInfo: nil, repeats: true)
+            
+            
         }
     }
     
@@ -292,8 +333,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func gameOverWithResult(_ result: Bool){
         
-       
-        let transition = SKTransition.crossFade(withDuration: 2.0)
+        print("result \(self.level)")
+        let transition = SKTransition.crossFade(withDuration: 1.0)
         let menuScene = MenuScene(size: size,
                                   gameResult: result,
                                   score: score,level: level)

@@ -25,6 +25,7 @@ class MenuScene: SKScene{
         
         self.result = gameResult
         self.score = score
+        self.level = level
         
         let backgroundNode = SKSpriteNode(imageNamed: "second")
         // adding the second background
@@ -34,7 +35,7 @@ class MenuScene: SKScene{
         addChild(backgroundNode)
         
         let gameResultTextNode = SKLabelNode(fontNamed: "Copperplate")
-        gameResultTextNode.text = "YOU " + (gameResult ? "WON" : "LOST") + " Level \(level)" 
+        gameResultTextNode.text = "YOU " + (gameResult ? "WON" : "LOST") + " Level \(self.level)"
         gameResultTextNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         gameResultTextNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
         gameResultTextNode.fontSize = 20
@@ -43,7 +44,7 @@ class MenuScene: SKScene{
         addChild(gameResultTextNode)
         
         let scoreTextNode = SKLabelNode(fontNamed: "Copperplate")
-        scoreTextNode.text = "SCORE :  \(score)"
+        scoreTextNode.text = "SCORE :  \(self.score)"
         scoreTextNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         scoreTextNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
         scoreTextNode.fontSize = 20
@@ -71,13 +72,12 @@ class MenuScene: SKScene{
                                                  y: tryAgainTextNodeLine1.position.y - 40.0)
         addChild(tryAgainTextNodeLine2)
         
-        self.level = level
-        
+        print("init \(self.level)")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let nextLevel:Int = result ? level + 1 : level
-        //let nextLevel = level + 1
+        print("\(nextLevel)")
         let transition = SKTransition.doorsOpenHorizontal(withDuration: 2.0)
         scene?.scaleMode = .aspectFill
         let gameScene = GameScene(size: size,level: nextLevel,score: score)

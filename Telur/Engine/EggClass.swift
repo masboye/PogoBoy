@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 class Egg:SKSpriteNode{
-
+    
     init(imageNamed: String, eggSize:CGSize) {
         
         let texture = SKTexture(imageNamed: imageNamed)
@@ -21,9 +21,10 @@ class Egg:SKSpriteNode{
         //box.physicsBody?.linearDamping = 1.0
         physicsBody?.mass = 0.01
         physicsBody?.restitution = 1.0
+        physicsBody?.allowsRotation = false
         
         physicsBody?.categoryBitMask = CollisionCategoryEgg
-        physicsBody?.contactTestBitMask = CollisionCategoryBatu
+        physicsBody?.contactTestBitMask = CollisionCategoryBatu | CollisionCategoryBox
         //physicsBody?.collisionBitMask = 0
     }
     

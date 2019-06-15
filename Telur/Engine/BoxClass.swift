@@ -12,48 +12,46 @@ import SpriteKit
 class BoxSpriteNode : SKSpriteNode
 {
     
-
+    
     var ballStartX: CGFloat = 0.0
     var ballStartY: CGFloat = 0.0
-
-    var canMove = true
+    
+    //var canMove = true
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //print("Touched \(self.name) \(self.parent?.children.count)")
-
-        //self.removeFromParent()
-
+        
+        
         if let touch = touches.first {
             physicsBody?.isDynamic = false
             let location = touch.location(in: self.parent!)
             ballStartX =  (position.x) - location.x // Location X of your sprite when touch started
             ballStartY =  (position.y) - location.y // Location Y of your sprite when touch started
             //print("\(ballStartX)-\(ballStartY)")
-
+            
         }
     }
-
+    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        if self.canMove {
-            if let touch = touches.first {
-                let location = touch.location(in: self.parent!)
-                
-                let newLocation =  CGPoint(x: location.x+ballStartX, y: location.y+ballStartY) // Move node around with distance to your finger
-                position = newLocation
-                
-            }
+        //if self.canMove {
+        if let touch = touches.first {
+            let location = touch.location(in: self.parent!)
+            
+            let newLocation =  CGPoint(x: location.x+ballStartX, y: location.y+ballStartY) // Move node around with distance to your finger
+            position = newLocation
+            
         }
+        //}
     }
-
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         physicsBody?.isDynamic = true
-        self.canMove = true
+        //self.canMove = true
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         physicsBody?.isDynamic = true
-        self.canMove = true
+        //self.canMove = true
     }
     
     
