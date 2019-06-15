@@ -23,6 +23,7 @@
 		EFC8328022A3AD310039FA96 /* BoxEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC8327F22A3AD310039FA96 /* BoxEngine.swift */; };
 		EFC8328222A3AD480039FA96 /* AllEnumeration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC8328122A3AD480039FA96 /* AllEnumeration.swift */; };
 		EFC8328422A3AE1F0039FA96 /* BoxHorizontalStacker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC8328322A3AE1F0039FA96 /* BoxHorizontalStacker.swift */; };
+		EFC978F522B4E66A0098F3C4 /* pogo logo.png in Resources */ = {isa = PBXBuildFile; fileRef = EFC978F422B4E66A0098F3C4 /* pogo logo.png */; };
 		EFDF8E6A22A4E54B00E23E8D /* BoxVerticalStacker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDF8E6922A4E54B00E23E8D /* BoxVerticalStacker.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		EFC8327F22A3AD310039FA96 /* BoxEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxEngine.swift; sourceTree = "<group>"; };
 		EFC8328122A3AD480039FA96 /* AllEnumeration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEnumeration.swift; sourceTree = "<group>"; };
 		EFC8328322A3AE1F0039FA96 /* BoxHorizontalStacker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxHorizontalStacker.swift; sourceTree = "<group>"; };
+		EFC978F422B4E66A0098F3C4 /* pogo logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pogo logo.png"; sourceTree = "<group>"; };
 		EFDF8E6922A4E54B00E23E8D /* BoxVerticalStacker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxVerticalStacker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,6 +99,7 @@
 				EFC8327322A379980039FA96 /* Assets.xcassets */,
 				EFC8327522A379980039FA96 /* LaunchScreen.storyboard */,
 				EFC8327822A379980039FA96 /* Info.plist */,
+				EFC978F422B4E66A0098F3C4 /* pogo logo.png */,
 			);
 			path = Telur;
 			sourceTree = "<group>";
@@ -176,6 +179,7 @@
 			files = (
 				EFC8327222A379970039FA96 /* Main.storyboard in Resources */,
 				EF9E633B22B398B9008196CE /* fire.sks in Resources */,
+				EFC978F522B4E66A0098F3C4 /* pogo logo.png in Resources */,
 				EFC8327422A379980039FA96 /* Assets.xcassets in Resources */,
 				EFC8327722A379980039FA96 /* LaunchScreen.storyboard in Resources */,
 				EF9E633C22B398B9008196CE /* Assets.xcassets in Resources */,
@@ -353,7 +357,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = kemlu.go.id.Telur;
+				PRODUCT_BUNDLE_IDENTIFIER = kemlu.go.id.PogoBoy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -371,7 +375,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = kemlu.go.id.Telur;
+				PRODUCT_BUNDLE_IDENTIFIER = kemlu.go.id.PogoBoy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
