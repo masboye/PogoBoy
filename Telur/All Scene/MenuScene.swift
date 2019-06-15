@@ -78,7 +78,7 @@ class MenuScene: SKScene{
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let nextLevel:Int = result ? level + 1 : level
         print("\(nextLevel)")
-        let transition = SKTransition.doorsOpenHorizontal(withDuration: 2.0)
+        let transition = SKTransition.doorsOpenHorizontal(withDuration: 1.0)
         scene?.scaleMode = .aspectFill
         let gameScene = GameScene(size: size,level: nextLevel,score: score)
         view?.presentScene(gameScene, transition: transition)

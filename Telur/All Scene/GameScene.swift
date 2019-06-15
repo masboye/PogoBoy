@@ -53,8 +53,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addTitle(){
-        startGameTextNode.fontSize = 30
-        startGameTextNode.text = "Tap anywhere to start!"
+        
+        if self.level == 1{
+            startGameTextNode.fontSize = 20
+            startGameTextNode.text = "Help Pogo Boy get to the platform \nMove the boxes to make way \nTap anywhere to start!"
+            //startGameTextNode.lineBreakMode = .byWordWrapping
+            startGameTextNode.numberOfLines = 0
+
+        }else{
+            startGameTextNode.fontSize = 30
+            startGameTextNode.text = "Tap anywhere to start!"
+        }
+        
         startGameTextNode.horizontalAlignmentMode = .center
         startGameTextNode.verticalAlignmentMode = .center
         startGameTextNode.fontColor = .red
