@@ -33,7 +33,7 @@ class FondationSpriteNode : SKSpriteNode
         baseKiri.position = CGPoint(x: 0 - baseKiri.size.width / 2  , y: baseKiri.size.height / 2 )
 //        //print("\(base.size) \(baseKanan.size)")
 //
-        physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: size.width + baseKanan.size.width, height: size.height), center: CGPoint(x:size.width / 2, y: size.height / 2))
+        physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: size.width + (baseKanan.size.width / 1.2), height: size.height), center: CGPoint(x:size.width / 2, y: size.height / 2))
 //
         
         physicsBody?.isDynamic = false
