@@ -10,6 +10,14 @@ import SpriteKit
 import GameplayKit
 import CoreMotion
 
+
+extension CGFloat {
+    var radians: Float {
+        return Float(self) * (Float.pi / 180)
+    }
+    
+}
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //let backgroundNode = SKSpriteNode(imageNamed: "background")
@@ -26,7 +34,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var loseGameTextNode:SKLabelNode!
     
     //var statusOfWinning = false
-    var boxLeft = 3
+    var boxLeft = 2
     let boxLeftText = SKLabelNode(fontNamed: "CopperPlate")
     
     var startGame = false
@@ -182,6 +190,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //        //swipedDown.direction = .down
         //        swipedRight.direction = .right
         //        view.addGestureRecognizer(swipedRight)
+        
+        let rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(self.boxRotate(_:)))
+        view.addGestureRecognizer(rotateGesture)
+        
+    }
+    
+    @objc func boxRotate( _ recognizer : UIRotationGestureRecognizer){
+        
+       let point = abs((recognizer.rotation * 100).rounded())
+       
+        foregroundNode.enumerateChildNodes(withName: "*box") { (node, stop) in
+            let box = node as! BoxSpriteNode
+            
+            if box.isSelected {
+              //print("\(point)")
+                //let oldAnchor = box.anchorPoint
+                //print("\(oldAnchor)")
+                box.anchorPoint = CGPoint(x:0.5,y: 0.5)
+                //var rotate = SKAction.rotate(toAngle: point, duration: TimeInterval(1))
+                //box.run(rotate)
+                box.zRotation = CGFloat(point.radians)
+                box.anchorPoint = CGPoint(x:0.0,y: 0.0)
+
+            }
+                
+            
+        }
+        
     }
     
     //    @objc func swipeLeft(sender:UISwipeGestureRecognizer){
@@ -343,7 +379,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func gameOverWithResult(_ result: Bool){
         
-        print("result \(self.level)")
+        //print("result \(self.level)")
         let transition = SKTransition.crossFade(withDuration: 1.0)
         let menuScene = MenuScene(size: size,
                                   gameResult: result,

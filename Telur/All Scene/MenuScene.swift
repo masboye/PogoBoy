@@ -72,7 +72,7 @@ class MenuScene: SKScene{
                                                  y: tryAgainTextNodeLine1.position.y - 40.0)
         addChild(tryAgainTextNodeLine2)
         
-        print("init \(self.level)")
+       // print("init \(self.level)")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
